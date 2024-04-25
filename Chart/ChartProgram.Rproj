@@ -1,0 +1,25 @@
+# Загрузка библиотек
+library(ggplot2)
+library(dplyr)
+
+# Создание данных
+data <- data.frame(
+  Month = c("January", "February", "March", "April", "May", "June"),
+  Revenue = c(10000, 12000, 15000, 11000, 13000, 14000)
+)
+
+# Преобразование типов данных (если необходимо)
+data$Month <- as.factor(data$Month)
+
+# Анализ данных
+sales_by_month <- data %>% 
+  group_by(Month) %>% 
+  summarise(total_sales = sum(Revenue))
+
+# Визуализация результатов
+ggplot(sales_by_month, aes(x=Month, y=total_sales)) +
+  geom_bar(stat='identity', fill='skyblue') +
+  labs(title='Monthly Sales Revenue', x='Month', y='Revenue') +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  theme_minimal()
+
